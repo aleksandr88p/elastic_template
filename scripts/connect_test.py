@@ -1,12 +1,16 @@
 from elasticsearch import Elasticsearch
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from config import index_name, address
 def connect_to_elasticsearch():
 
     
     try:
         print("Connecting to Elasticsearch...")
         # Attempt to connect to Elasticsearch
-        es = Elasticsearch("http://localhost:9200")
+        es = Elasticsearch(address)
         print(es.info())
         
         print("Elasticsearch client created")

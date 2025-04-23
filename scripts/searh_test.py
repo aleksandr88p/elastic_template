@@ -3,10 +3,10 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from elasticsearch import Elasticsearch
-from config import index_name
+from config import index_name, address
 
 def search_laws(query, size=5):
-    es = Elasticsearch("http://localhost:9200")
+    es = Elasticsearch(address)
     body = {
         "query": {
             "multi_match": {

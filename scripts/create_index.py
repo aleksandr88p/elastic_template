@@ -2,12 +2,11 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import RequestError
-from config import index_name
+from config import index_name, address
 
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch(address)
 
 mapping = {
     "mappings": {

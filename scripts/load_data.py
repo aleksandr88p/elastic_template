@@ -1,10 +1,11 @@
 import sys
 import os
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 from elasticsearch import Elasticsearch, helpers
-from config import index_name
+from config import index_name, address
 
 NDJSON_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'all_laws.ndjson')
 
@@ -19,7 +20,7 @@ def generate_docs(ndjson_path):
                 }
 
 def main():
-    es = Elasticsearch("http://localhost:9200")
+    es = Elasticsearch(address)
     print(f"Загрузка данных из {NDJSON_PATH} в индекс '{index_name}' ...")
     try:
         result = helpers.bulk(es, generate_docs(NDJSON_PATH))
@@ -29,3 +30,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -1,8 +1,8 @@
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import NotFoundError
-from config import index_name
+from config import index_name, address
 
-es = Elasticsearch("http://localhost:9200")
+es = Elasticsearch(address)
 
 try:
     es.indices.delete(index=index_name)
