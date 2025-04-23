@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   elasticsearch:
     image: elasticsearch:8.12.2
@@ -8,7 +9,7 @@ services:
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
-          - elasticsearch_data:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -20,6 +21,20 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+  scripts:
+    build:
+      context: .
+      dockerfile: Dockerfile.scripts
+    volumes:
+      - ./data:/app/data
+      - ./scripts:/app/scripts
+      - ./config.py:/app/config.py
+    depends_on:
+      - elasticsearch
+    entrypoint: ["bash"]
+    networks:
+      - elastic_network
 
 networks:
   elastic_network:
