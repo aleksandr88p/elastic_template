@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import NotFoundError
 from config import index_name, address
